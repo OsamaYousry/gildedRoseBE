@@ -1,12 +1,13 @@
-package com.gildedrose;
+package com.gildedrose.factories;
 
+import com.gildedrose.Item;
 import com.gildedrose.strategies.*;
 
 public class ItemStrategyFactory {
     private ItemStrategy currentStrategy;
     private Item item;
 
-    ItemStrategyFactory(Item item) {
+    public ItemStrategyFactory(Item item) {
         ItemStrategy strategy;
         switch (item.name) {
             case SulfurasStrategy.NAME:

@@ -1,16 +1,13 @@
 package com.gildedrose;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
 class GildedRose {
-    Item[] items;
-
-    public GildedRose(Item[] items) {
-        this.items = items;
+    public static void main(String[] args) {
+        SpringApplication.run(GildedRose.class, args);
     }
 
-    public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            ItemStrategyFactory factory = new ItemStrategyFactory(items[i]);
-            factory.execute();
-        }
-    }
+
 }

@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import com.gildedrose.controller.ItemsController;
+
 public class TexttestFixture {
     public static void main(String[] args) {
         System.out.println("OMGHAI!");
@@ -16,7 +18,7 @@ public class TexttestFixture {
                 // this conjured item does not work properly yet
                 new Item("Conjured Mana Cake", 3, 6) };
 
-        GildedRose app = new GildedRose(items);
+        ItemsController app = new ItemsController();
 
         int days = 2;
         if (args.length > 0) {
@@ -30,7 +32,7 @@ public class TexttestFixture {
                 System.out.println(item);
             }
             System.out.println();
-            app.updateQuality();
+            app.updateQuality(items);
         }
     }
 
