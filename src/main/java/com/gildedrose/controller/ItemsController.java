@@ -20,7 +20,7 @@ public class ItemsController {
             ItemStrategyFactory factory = new ItemStrategyFactory();
             factory.setCurrentStrategy(item);
             factory.execute(item);
-            itemsList.add(new ItemDTO(item));
+            itemsList.add(new ItemDTO(item, items[i].getId()));
         }
         return itemsList;
     }

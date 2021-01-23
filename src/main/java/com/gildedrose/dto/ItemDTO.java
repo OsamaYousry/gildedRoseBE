@@ -6,15 +6,25 @@ public class ItemDTO {
     private String name;
     private int sellIn;
     private int quality;
+    private int id;
 
     public ItemDTO() {
 
     }
 
-    public ItemDTO(Item item) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ItemDTO(Item item, int id) {
         this.name = item.name;
         this.sellIn = item.sellIn;
         this.quality = item.quality;
+        this.id = id;
     }
 
     public ItemDTO(String name, int sellIn, int quality) {
