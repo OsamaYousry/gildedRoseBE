@@ -16,7 +16,7 @@ public class ItemsController {
     public ArrayList<ItemDTO> updateQuality(@RequestBody ItemDTO[] items) {
         ArrayList<ItemDTO> itemsList = new ArrayList<ItemDTO>();
         for (int i = 0; i < items.length; i++) {
-            Item item = new Item(items[0].getName(), items[0].getSellIn(), items[0].getQuality());
+            Item item = new Item(items[i].getName(), items[i].getSellIn(), items[i].getQuality());
             ItemStrategyFactory factory = new ItemStrategyFactory(item);
             factory.execute();
             itemsList.add(new ItemDTO(item));
