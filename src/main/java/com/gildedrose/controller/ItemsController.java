@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ItemsController {
-    @PutMapping("/")
+    @PutMapping("/api")
     public ArrayList<ItemDTO> updateQuality(@RequestBody ItemDTO[] items) {
         ArrayList<ItemDTO> itemsList = new ArrayList<ItemDTO>();
         for (int i = 0; i < items.length; i++) {
