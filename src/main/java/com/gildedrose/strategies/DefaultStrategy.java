@@ -4,7 +4,7 @@ public class DefaultStrategy extends ItemStrategy {
 
     @Override
     int updateQuality(int quality, int sellIn) {
-        quality -= sellIn >= 0 ? 1 : 2;
+        quality -= sellIn > 0 ? 1 : 2;
         quality = qualityMinimum(quality);
         return quality;
     }

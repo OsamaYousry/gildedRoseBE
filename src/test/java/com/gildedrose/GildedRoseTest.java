@@ -117,7 +117,7 @@ class GildedRoseTest {
 
     @Test
     void testNormalItemDecreasesByOneBeforeSellIn() {
-        int quality = generateRandomNumber(50, false);
+        int quality = generateRandomNumber(1, 50);
         int sellIn = generateRandomNumber(50, false);
         Item[] items = new Item[] { new Item("Elixir of the Mongoose", sellIn, quality) };
         ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);

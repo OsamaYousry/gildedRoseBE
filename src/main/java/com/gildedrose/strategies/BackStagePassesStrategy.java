@@ -9,7 +9,7 @@ public class BackStagePassesStrategy extends ItemStrategy {
             quality += 1;
         else if (sellIn <= 10 && sellIn > 5)
             quality += 2;
-        else if (sellIn <= 5 && sellIn >= 0)
+        else if (sellIn <= 5 && sellIn > 0)
             quality += 3;
         else
             quality = 0;

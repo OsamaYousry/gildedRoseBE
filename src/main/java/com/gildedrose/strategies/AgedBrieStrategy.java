@@ -5,7 +5,7 @@ public class AgedBrieStrategy extends ItemStrategy {
 
     @Override
     int updateQuality(int quality, int sellIn) {
-        quality += sellIn >= 0 ? 1 : 2;
+        quality += sellIn > 0 ? 1 : 2;
         quality = this.qualityMaximum(quality);
         return quality;
     }

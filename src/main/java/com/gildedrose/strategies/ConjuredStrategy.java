@@ -5,7 +5,7 @@ public class ConjuredStrategy extends ItemStrategy {
 
     @Override
     int updateQuality(int quality, int sellIn) {
-        quality -= sellIn >= 0 ? 2 : 4;
+        quality -= sellIn > 0 ? 2 : 4;
         quality = this.qualityMinimum(quality);
         return quality;
     }
