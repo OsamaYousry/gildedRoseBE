@@ -18,7 +18,7 @@ public class TexttestFixture {
                 // this conjured item does not work properly yet
                 new Item("Conjured Mana Cake", 3, 6) };
 
-        ItemsController app = new ItemsController();
+        // ItemsController app = new ItemsController();
 
         int days = 2;
         if (args.length > 0) {
@@ -32,7 +32,7 @@ public class TexttestFixture {
                 System.out.println(item);
             }
             System.out.println();
-            app.updateQuality(items);
+            // app.updateQuality(items);
         }
     }
 

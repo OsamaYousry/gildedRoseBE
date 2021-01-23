@@ -1,22 +1,26 @@
 package com.gildedrose.controller;
 
+import java.util.ArrayList;
+
 import com.gildedrose.Item;
+import com.gildedrose.dto.ItemDTO;
 import com.gildedrose.factories.ItemStrategyFactory;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ItemsController {
-    @RequestMapping("/")
-    public String index() {
-        return "Greetings from Spring Boot!";
-    }
-
-    public void updateQuality(Item[] items) {
+    @PutMapping("/")
+    public ArrayList<ItemDTO> updateQuality(@RequestBody ItemDTO[] items) {
+        ArrayList<ItemDTO> itemsList = new ArrayList<ItemDTO>();
         for (int i = 0; i < items.length; i++) {
-            ItemStrategyFactory factory = new ItemStrategyFactory(items[i]);
+            Item item = new Item(items[0].getName(), items[0].getSellIn(), items[0].getQuality());
+            ItemStrategyFactory factory = new ItemStrategyFactory(item);
             factory.execute();
+            itemsList.add(new ItemDTO(item));
         }
+        return itemsList;
     }
 }

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.gildedrose.controller.ItemsController;
+import com.gildedrose.factories.ItemStrategyFactory;
 
 class GildedRoseTest {
 
@@ -13,8 +13,8 @@ class GildedRoseTest {
         int quality = generateRandomNumber(50, false);
         int sellIn = generateRandomNumber(100, true);
         Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Sulfuras, Hand of Ragnaros", items[0].name);
         assertEquals(sellIn, items[0].sellIn);
         assertEquals(80, items[0].quality);
@@ -25,8 +25,8 @@ class GildedRoseTest {
         int quality = generateRandomNumber(48, false);
         int sellIn = generateRandomNumber(6, 10);
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Backstage passes to a TAFKAL80ETC concert", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(quality + 2, items[0].quality);
@@ -37,8 +37,8 @@ class GildedRoseTest {
         int quality = generateRandomNumber(49, 50);
         int sellIn = generateRandomNumber(6, 10);
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Backstage passes to a TAFKAL80ETC concert", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(50, items[0].quality);
@@ -49,8 +49,8 @@ class GildedRoseTest {
         int quality = generateRandomNumber(47, false);
         int sellIn = generateRandomNumber(1, 5);
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Backstage passes to a TAFKAL80ETC concert", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(quality + 3, items[0].quality);
@@ -61,8 +61,8 @@ class GildedRoseTest {
         int quality = generateRandomNumber(48, 50);
         int sellIn = generateRandomNumber(1, 5);
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Backstage passes to a TAFKAL80ETC concert", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(50, items[0].quality);
@@ -71,11 +71,11 @@ class GildedRoseTest {
     @Test
     void testBackStagePassesDropToZeroAfterConcert() {
         int quality = generateRandomNumber(50, false);
-        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", -1, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 0, quality) };
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Backstage passes to a TAFKAL80ETC concert", items[0].name);
-        assertEquals(-2, items[0].sellIn);
+        assertEquals(-1, items[0].sellIn);
         assertEquals(0, items[0].quality);
     }
 
@@ -84,8 +84,8 @@ class GildedRoseTest {
         int quality = generateRandomNumber(49, false);
         int sellIn = generateRandomNumber(50, false);
         Item[] items = new Item[] { new Item("Aged Brie", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Aged Brie", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(quality + 1, items[0].quality);
@@ -97,8 +97,8 @@ class GildedRoseTest {
         int sellIn = generateRandomNumber(50, false);
         sellIn = -sellIn;
         Item[] items = new Item[] { new Item("Aged Brie", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Aged Brie", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(quality + 2, items[0].quality);
@@ -108,8 +108,8 @@ class GildedRoseTest {
     void testAgedBrieDoesntIncreaseOverFifty() {
         int sellIn = generateRandomNumber(50, true);
         Item[] items = new Item[] { new Item("Aged Brie", sellIn, 50) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Aged Brie", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(50, items[0].quality);
@@ -120,8 +120,8 @@ class GildedRoseTest {
         int quality = generateRandomNumber(50, false);
         int sellIn = generateRandomNumber(50, false);
         Item[] items = new Item[] { new Item("Elixir of the Mongoose", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Elixir of the Mongoose", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(quality - 1, items[0].quality);
@@ -132,8 +132,8 @@ class GildedRoseTest {
         int quality = generateRandomNumber(0, 1);
         int sellIn = generateRandomNumber(50, false);
         Item[] items = new Item[] { new Item("Elixir of the Mongoose", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Elixir of the Mongoose", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(0, items[0].quality);
@@ -145,8 +145,8 @@ class GildedRoseTest {
         int sellIn = generateRandomNumber(1, 50);
         sellIn = -sellIn;
         Item[] items = new Item[] { new Item("Elixir of the Mongoose", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Elixir of the Mongoose", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(quality - 2, items[0].quality);
@@ -158,8 +158,8 @@ class GildedRoseTest {
         int sellIn = generateRandomNumber(50, false);
         sellIn = -sellIn;
         Item[] items = new Item[] { new Item("Elixir of the Mongoose", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Elixir of the Mongoose", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(0, items[0].quality);
@@ -170,8 +170,8 @@ class GildedRoseTest {
         int quality = generateRandomNumber(2, 50);
         int sellIn = generateRandomNumber(50, false);
         Item[] items = new Item[] { new Item("Conjured", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Conjured", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(quality - 2, items[0].quality);
@@ -182,8 +182,8 @@ class GildedRoseTest {
         int quality = generateRandomNumber(0, 2);
         int sellIn = generateRandomNumber(50, false);
         Item[] items = new Item[] { new Item("Conjured", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Conjured", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(0, items[0].quality);
@@ -195,8 +195,8 @@ class GildedRoseTest {
         int sellIn = generateRandomNumber(50, false);
         sellIn = -sellIn;
         Item[] items = new Item[] { new Item("Conjured", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Conjured", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(quality - 4, items[0].quality);
@@ -208,8 +208,8 @@ class GildedRoseTest {
         int sellIn = generateRandomNumber(50, false);
         sellIn = -sellIn;
         Item[] items = new Item[] { new Item("Conjured", sellIn, quality) };
-        ItemsController app = new ItemsController();
-        app.updateQuality(items);
+        ItemStrategyFactory factory = new ItemStrategyFactory(items[0]);
+        factory.execute();
         assertEquals("Conjured", items[0].name);
         assertEquals(sellIn - 1, items[0].sellIn);
         assertEquals(0, items[0].quality);
