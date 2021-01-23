@@ -163,6 +163,56 @@ class GildedRoseTest {
         assertEquals(0, app.items[0].quality);
     }
 
+    @Test
+    void testConjuredDegradeTwiceBeforeSellIn() {
+        int quality = generateRandomNumber(2, 50);
+        int sellIn = generateRandomNumber(50, false);
+        Item[] items = new Item[] { new Item("Conjured", sellIn, quality) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals("Conjured", app.items[0].name);
+        assertEquals(sellIn - 1, app.items[0].sellIn);
+        assertEquals(quality - 2, app.items[0].quality);
+    }
+
+    @Test
+    void testConjuredNeverDegradesBelowZeroBeforeSellIn() {
+        int quality = generateRandomNumber(0, 2);
+        int sellIn = generateRandomNumber(50, false);
+        Item[] items = new Item[] { new Item("Conjured", sellIn, quality) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals("Conjured", app.items[0].name);
+        assertEquals(sellIn - 1, app.items[0].sellIn);
+        assertEquals(0, app.items[0].quality);
+    }
+
+    @Test
+    void testConjuredDegradeFourTimesAfterSellIn() {
+        int quality = generateRandomNumber(50, false);
+        int sellIn = generateRandomNumber(50, false);
+        sellIn = -sellIn;
+        Item[] items = new Item[] { new Item("Conjured", sellIn, quality) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals("Conjured", app.items[0].name);
+        assertEquals(sellIn - 1, app.items[0].sellIn);
+        assertEquals(quality - 4, app.items[0].quality);
+    }
+
+    @Test
+    void testConjuredNeverDegradeBelowZeroAfterSellIn() {
+        int quality = generateRandomNumber(0, 4);
+        int sellIn = generateRandomNumber(50, false);
+        sellIn = -sellIn;
+        Item[] items = new Item[] { new Item("Conjured", sellIn, quality) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals("Conjured", app.items[0].name);
+        assertEquals(sellIn - 1, app.items[0].sellIn);
+        assertEquals(0, app.items[0].quality);
+    }
+
     private int generateRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }
