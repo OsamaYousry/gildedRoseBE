@@ -17,8 +17,9 @@ public class ItemsController {
         ArrayList<ItemDTO> itemsList = new ArrayList<ItemDTO>();
         for (int i = 0; i < items.length; i++) {
             Item item = new Item(items[i].getName(), items[i].getSellIn(), items[i].getQuality());
-            ItemStrategyFactory factory = new ItemStrategyFactory(item);
-            factory.execute();
+            ItemStrategyFactory factory = new ItemStrategyFactory();
+            factory.setCurrentStrategy(item);
+            factory.execute(item);
             itemsList.add(new ItemDTO(item));
         }
         return itemsList;

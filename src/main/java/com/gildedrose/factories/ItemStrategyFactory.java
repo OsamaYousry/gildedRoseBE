@@ -5,9 +5,8 @@ import com.gildedrose.strategies.*;
 
 public class ItemStrategyFactory {
     private ItemStrategy currentStrategy;
-    private Item item;
 
-    public ItemStrategyFactory(Item item) {
+    public void setCurrentStrategy(Item item) {
         ItemStrategy strategy;
         switch (item.name) {
             case SulfurasStrategy.NAME:
@@ -27,10 +26,9 @@ public class ItemStrategyFactory {
                 break;
         }
         this.currentStrategy = strategy;
-        this.item = item;
     }
 
-    public void execute() {
+    public void execute(Item item) {
         this.currentStrategy.passDay(item);
     }
 }
