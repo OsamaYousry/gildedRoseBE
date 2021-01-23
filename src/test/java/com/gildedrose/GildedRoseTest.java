@@ -69,11 +69,11 @@ class GildedRoseTest {
     @Test
     void testBackStagePassesDropToZeroAfterConcert() {
         int quality = generateRandomNumber(50, false);
-        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 0, quality) };
+        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", -1, quality) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals("Backstage passes to a TAFKAL80ETC concert", app.items[0].name);
-        assertEquals(-1, app.items[0].sellIn);
+        assertEquals(-2, app.items[0].sellIn);
         assertEquals(0, app.items[0].quality);
     }
 
@@ -140,7 +140,7 @@ class GildedRoseTest {
     @Test
     void testNormalItemDecreasesByTwoAfterSellIn() {
         int quality = generateRandomNumber(2, 50);
-        int sellIn = generateRandomNumber(50, false);
+        int sellIn = generateRandomNumber(1, 50);
         sellIn = -sellIn;
         Item[] items = new Item[] { new Item("Elixir of the Mongoose", sellIn, quality) };
         GildedRose app = new GildedRose(items);
@@ -189,7 +189,7 @@ class GildedRoseTest {
 
     @Test
     void testConjuredDegradeFourTimesAfterSellIn() {
-        int quality = generateRandomNumber(50, false);
+        int quality = generateRandomNumber(4, 50);
         int sellIn = generateRandomNumber(50, false);
         sellIn = -sellIn;
         Item[] items = new Item[] { new Item("Conjured", sellIn, quality) };
