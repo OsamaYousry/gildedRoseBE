@@ -17,6 +17,12 @@ public class ItemDTO {
         this.quality = item.quality;
     }
 
+    public ItemDTO(String name, int sellIn, int quality) {
+        this.name = name;
+        this.sellIn = sellIn;
+        this.quality = quality;
+    }
+
     public String getName() {
         return name;
     }
@@ -39,6 +45,11 @@ public class ItemDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + ", " + this.sellIn + ", " + this.quality;
     }
 
 }
